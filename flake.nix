@@ -2,6 +2,9 @@
 # based on https://gitlab.com/ShrykeWindgrace/powershell-modules/-/tree/master/oh-my-posh
   description = "install oh-my-posh";
 
+  # Nixpkgs / NixOS version to use.
+  inputs.nixpkgs.url = "nixpkgs/nixos-21.11";
+
   outputs = { self, nixpkgs }:
     let
 
@@ -71,13 +74,18 @@
 
       defaultPackage = forAllSystems (system: self.packages.${system}.oh-my-posh);
 
-      defaultApp = let
-      in
-      forAllSystems (system: {
+      defaultApp = forAllSystems (system:
+      {
         type = "app";
         program = "${self.packages.${system}.oh-my-posh}/oh-my-posh/oh-my-posh";
-      }
-      );
+      });
+
+      devShell = forAllSystems (system:
+        let pkgs = nixpkgsFor.${system};
+        in pkgs.mkShell {
+          buildInputs = with pkgs; [ nix sl ];
+        });
+
 
     };
 }
