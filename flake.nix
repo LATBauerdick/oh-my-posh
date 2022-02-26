@@ -26,16 +26,30 @@
         {
           oh-my-posh =
           let
-            version = "7.15.0";
+            version = "7.24.0";
             pname = "oh-my-posh";
-            exec = pkgs.fetchurl {
-              url = "https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/v${version}/posh-linux-amd64";
-              sha256 = "cI6f2P7VzErBZ6SyKpQvKv9O1cr5wCvqOwF+w5bzt1c=";
-              executable = true;
-            };
+            exec = if system == "x86_64-linux"
+              then
+                pkgs.fetchurl {
+                  url = "https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/v${version}/posh-linux-amd64";
+                  sha256 = "oLQrVqvRn91rANuA/y7voHbBtrRfsyoC+SpoiWAWLGE=";
+                  executable = true;
+                }
+              else if system == "aarch64-linux" then
+                pkgs.fetchurl {
+                  url = "https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/v${version}/posh-linux-arm64";
+                  sha256 = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+                  executable = true;
+                }
+              else
+                pkgs.fetchurl {
+                  url = "https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/v${version}/posh-darwin-amd64";
+                  sha256 = "SQWbgglCjv1AhTA66OJqiABR5i8ITSeDPVofnxjFEJ8=";
+                  executable = true;
+                };
             themes = pkgs.fetchurl {
               url = "https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/v${version}/themes.zip";
-              sha256 = "ZGxb7gKktWrubmat88SwULLqj+1tgqsT15GVBbuy2nQ=";
+              sha256 = "mLINcEBVC6uJals8igDb8Zq/hPOGcUk6wTT2iE8ctN4=";
             };
           in
           pkgs.stdenv.mkDerivation {
