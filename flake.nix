@@ -59,8 +59,8 @@
               installPhase = let p = "${pname}/${version}"; in
                 ''
                   mkdir -p $out/${p}/themes
-                  mkdir -p $out/${p}/bin
-                  cp ${exec} $out/${pname}/oh-my-posh
+                  mkdir -p $out/bin
+                  cp ${exec} $out/bin/oh-my-posh
                   unzip ${themes} -d $out/${p}/themes
                   cp -r * $out/${p}
                 '';
@@ -79,10 +79,13 @@
 
         defaultPackage = self.packages.${system}.oh-my-posh;
 
-        defaultApp = {
-          type = "app";
-          program = "${self.packages.${system}.oh-my-posh}/oh-my-posh/oh-my-posh";
-        };
+        /* defaultApp = { */
+        /*   type = "app"; */
+        /*   program = "${self.packages.${system}.oh-my-posh}/oh-my-posh/oh-my-posh"; */
+        /* }; */
+
+        defaultApp = utils.lib.mkApp { drv = self.defaultPackage."${system}"; };
+
 
         devShell =
           pkgs.mkShell {
