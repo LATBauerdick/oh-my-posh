@@ -52,7 +52,7 @@
                   owner = "JanDeDobbeleer";
                   repo = "oh-my-posh";
                   rev = "v${version}";
-                  sha256 = "tbkfcc7zOVJcfgiBFzYnxJ9rznnmPubugIKnT1AQQFQ=";
+                  sha256 = "CbFuQoUYkgqG85gxpyew95Pofq/3PYf96f1JlpLMdnU=";
                 } + "/packages/powershell/";
 
 
