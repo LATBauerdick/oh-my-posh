@@ -30,7 +30,7 @@
                 else if system == "aarch64-linux" then
                   pkgs.fetchurl {
                     url = "https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/v${version}/posh-linux-arm64";
-                    sha256 = "oLQrVqvRn91rANuA/y7voHbBtrRfsyoC+SpoiWAWLGE=";
+                    sha256 = "sha256-nWGcCkCCw+qUfkbgGjtX/988nvcJ+IMpu+ze2cUfQF0=";
                     executable = true;
                   }
                 else
